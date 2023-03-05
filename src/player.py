@@ -67,13 +67,19 @@ class Player:
                 break
 
     def show_some(self):
-
-        pass
+        for i in self.hand.cards:
+            print('Card {index} \n'.format(index=i))
+            if i == 0:
+                continue
+            print(self.hand.cards[i])
 
     def show_all(self):
-
-        pass
+        for i in self.hand.cards:
+            print('Card {index} \n'.format(index=i))
+            print(self.hand.cards[i])
 
     def show(self):
-
-        pass
+        if not self.is_player:
+            self.show_some()
+        else:
+            self.show_all()
