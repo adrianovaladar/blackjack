@@ -1,3 +1,6 @@
+global playing
+
+
 class Hand:
     def __init__(self):
         self.cards = []
@@ -15,38 +18,34 @@ class Hand:
             self.value -= 10
 
 
-class Chips:
-
-    def __init__(self):
-        self.total = 100
-        self.bet = 0
-
-    def win_bet(self):
-        pass
-
-    def lose_bet(self):
-        pass
-
-
 class Player:
 
     def __init__(self, is_player):
         self.hand = Hand()
-        self.chips = Chips()
         self.is_player = is_player
+        self.total_chips = 100
+        self.bet = 0
+
+    def win_bet(self):
+        self.total_chips += self.bet
+        self.bet = 0
+
+    def lose_bet(self):
+        self.total_chips -= self.bet
+        self.bet = 0
 
     def take_bet(self):
         while True:
             try:
-                n = int(input('Input an integer (max {total}): '.format(total=self.chips.total)))
+                n = int(input('Input an integer (max {total}): '.format(total=self.total_chips)))
             except TypeError:
                 print('An error occurred! Please try again!')
                 continue
             else:
-                if n > self.chips.total:
+                if n > self.total_chips:
                     continue
-                self.chips.bet = n
-                self.chips.total -= n
+                self.bet = n
+                self.total_chips -= n
                 break
 
     def hit(self, deck):
@@ -59,5 +58,22 @@ class Player:
             self.hand.add_card(card)
 
     def hit_or_stand(self, deck):
-        global playing
+        while True:
+            option = input('Do you want to hit (h) or stand (s)? ')
+            if option == 'h' or option != 'H':
+                self.hit(deck)
+                break
+            elif option == 's' or option == 'S':
+                break
+
+    def show_some(self):
+
+        pass
+
+    def show_all(self):
+
+        pass
+
+    def show(self):
+
         pass
