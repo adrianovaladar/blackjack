@@ -29,6 +29,6 @@ class Deck:
 
     def pick_card(self):
         if len(self.cards) > 0:
-            self.cards.pop()
+            return self.cards.pop()
         else:
             return 'Empty deck'

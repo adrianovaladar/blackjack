@@ -1,3 +1,4 @@
+from deck import *
 global playing
 
 
@@ -55,7 +56,10 @@ class Player:
                 self.hand.add_card(card)
         else:
             card = deck.pick_card()
-            self.hand.add_card(card)
+            if type(card) is Card:
+                self.hand.add_card(card)
+            elif type(card) is str:
+                print(card)
 
     def hit_or_stand(self, deck):
         while True:
