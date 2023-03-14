@@ -1,5 +1,4 @@
 from deck import *
-global playing
 
 
 class Hand:
@@ -26,6 +25,10 @@ class Player:
         self.is_player = is_player
         self.total_chips = 100
         self.bet = 0
+        if is_player:
+            self.name = 'Player'
+        else:
+            self.name = 'Dealer'
 
     def win_bet(self):
         self.total_chips += self.bet
@@ -71,15 +74,18 @@ class Player:
                 break
 
     def show_some(self):
-        for i in self.hand.cards:
-            print('Card {index} \n'.format(index=i))
+        print('Dealer hand')
+        for i in range(len(self.hand.cards)):
+            print('Card {index}'.format(index=i+1))
             if i == 0:
+                print('Hidden card')
                 continue
             print(self.hand.cards[i])
 
     def show_all(self):
-        for i in self.hand.cards:
-            print('Card {index} \n'.format(index=i))
+        print('Player hand')
+        for i in range(len(self.hand.cards)):
+            print('Card {index}'.format(index=i+1))
             print(self.hand.cards[i])
 
     def show(self):
@@ -87,3 +93,6 @@ class Player:
             self.show_some()
         else:
             self.show_all()
+
+    def bust(self):
+        return self.hand.value > 21
